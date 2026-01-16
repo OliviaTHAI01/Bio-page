@@ -135,6 +135,107 @@
             transform: translateX(2px);
         }
 
+        .discord-wrapper {
+            position: relative;
+        }
+
+        .discord-dropdown {
+            display: none;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 8px;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        .discord-dropdown.active {
+            display: flex;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .discord-option {
+            display: block;
+            padding: 12px 20px;
+            border: 2px solid #000000;
+            background: #ffffff;
+            color: #000000;
+            text-decoration: none;
+            font-size: 0.9em;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .discord-option::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: #000000;
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .discord-option:hover {
+            color: #ffffff;
+            transform: translateX(4px);
+        }
+
+        .discord-option:hover::before {
+            left: 0;
+        }
+
+        .donate-btn {
+            display: block;
+            padding: 16px 24px;
+            border: 2px solid #000000;
+            background: #ffffff;
+            color: #000000;
+            text-decoration: none;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            transition: all 0.2s ease;
+            position: relative;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+
+        .donate-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: #000000;
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .donate-btn:hover {
+            color: #ffffff;
+            transform: translateX(4px);
+        }
+
+        .donate-btn:hover::before {
+            left: 0;
+        }
+
         @media (max-width: 480px) {
             .container {
                 padding: 40px 30px;
@@ -155,6 +256,16 @@
                 padding: 14px 20px;
                 font-size: 0.9em;
             }
+
+            .discord-option {
+                padding: 10px 18px;
+                font-size: 0.85em;
+            }
+
+            .donate-btn {
+                padding: 14px 20px;
+                font-size: 0.9em;
+            }
         }
     </style>
 </head>
@@ -165,10 +276,34 @@
         
         <div class="links">
             <a href="https://www.tiktok.com/@yourusername" target="_blank" class="link-item">TikTok</a>
-            <a href="https://discord.gg/yourinvite" target="_blank" class="link-item">Discord</a>
+            <div class="discord-wrapper">
+                <a href="#" class="link-item" id="discord-btn">Discord</a>
+                <div class="discord-dropdown" id="discord-dropdown">
+                    <a href="https://discord.gg/yourinvite1" target="_blank" class="discord-option">Discord Server 1</a>
+                    <a href="https://discord.gg/yourinvite2" target="_blank" class="discord-option">Discord Server 2</a>
+                </div>
+            </div>
             <a href="https://www.facebook.com/yourusername" target="_blank" class="link-item">Facebook</a>
+            <a href="https://your-donate-link.com" target="_blank" class="donate-btn">Donate</a>
         </div>
     </div>
+
+    <script>
+        document.getElementById('discord-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            const dropdown = document.getElementById('discord-dropdown');
+            dropdown.classList.toggle('active');
+        });
+
+        // ปิด dropdown เมื่อคลิกข้างนอก
+        document.addEventListener('click', function(e) {
+            const discordWrapper = document.querySelector('.discord-wrapper');
+            const dropdown = document.getElementById('discord-dropdown');
+            if (!discordWrapper.contains(e.target)) {
+                dropdown.classList.remove('active');
+            }
+        });
+    </script>
 </body>
 </html>
 
