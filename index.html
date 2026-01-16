@@ -201,18 +201,29 @@
 
         .donate-btn {
             display: block;
-            padding: 16px 24px;
-            border: 2px solid #000000;
-            background: #ffffff;
+            padding: 20px 28px;
+            border: 4px solid #000000;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
             color: #000000;
             text-decoration: none;
-            font-size: 0.95em;
-            font-weight: 500;
-            letter-spacing: 0.3px;
-            transition: all 0.2s ease;
+            font-size: 1.15em;
+            font-weight: 700;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            margin-top: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+            }
+            50% {
+                box-shadow: 0 8px 30px rgba(255, 215, 0, 0.6);
+            }
         }
 
         .donate-btn::before {
@@ -222,18 +233,23 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: #000000;
+            background: linear-gradient(135deg, #000000 0%, #333333 100%);
             transition: left 0.3s ease;
             z-index: -1;
         }
 
         .donate-btn:hover {
-            color: #ffffff;
-            transform: translateX(4px);
+            color: #FFD700;
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 10px 35px rgba(255, 215, 0, 0.6);
         }
 
         .donate-btn:hover::before {
             left: 0;
+        }
+
+        .donate-btn:active {
+            transform: translateY(-1px) scale(1.01);
         }
 
         @media (max-width: 480px) {
@@ -263,8 +279,9 @@
             }
 
             .donate-btn {
-                padding: 14px 20px;
-                font-size: 0.9em;
+                padding: 18px 24px;
+                font-size: 1.05em;
+                margin-bottom: 15px;
             }
         }
     </style>
@@ -275,16 +292,16 @@
         <h1 class="name">MADAMBOSSY01</h1>
         
         <div class="links">
+            <a href="https://your-donate-link.com" target="_blank" class="donate-btn">Donate</a>
             <a href="https://www.tiktok.com/@yourusername" target="_blank" class="link-item">TikTok</a>
             <div class="discord-wrapper">
                 <a href="#" class="link-item" id="discord-btn">Discord</a>
                 <div class="discord-dropdown" id="discord-dropdown">
-                    <a href="https://discord.gg/yourinvite1" target="_blank" class="discord-option">Discord Server 1</a>
-                    <a href="https://discord.gg/yourinvite2" target="_blank" class="discord-option">Discord Server 2</a>
+                    <a href="https://discord.gg/JWn8nXmfY9" target="_blank" class="discord-option">Discord Server 1</a>
+                    <a href="https://discord.gg/NvX9XUsCaw" target="_blank" class="discord-option">Discord Server 2</a>
                 </div>
             </div>
             <a href="https://www.facebook.com/yourusername" target="_blank" class="link-item">Facebook</a>
-            <a href="https://your-donate-link.com" target="_blank" class="donate-btn">Donate</a>
         </div>
     </div>
 
