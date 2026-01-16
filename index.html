@@ -121,6 +121,7 @@
             overflow: hidden;
             border-radius: 12px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            isolation: isolate;
         }
 
         .link-item::before {
@@ -133,6 +134,7 @@
             background: #000000;
             transition: left 0.3s ease;
             z-index: -1;
+            opacity: 0;
         }
 
         .link-item:hover {
@@ -143,6 +145,7 @@
 
         .link-item:hover::before {
             left: 0;
+            opacity: 1;
         }
 
         .link-item:active {
@@ -192,6 +195,7 @@
             overflow: hidden;
             border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            isolation: isolate;
         }
 
         .discord-option::before {
@@ -202,8 +206,9 @@
             width: 100%;
             height: 100%;
             background: #000000;
-            transition: left 0.3s ease;
+            transition: left 0.3s ease, opacity 0.3s ease;
             z-index: -1;
+            opacity: 0;
         }
 
         .discord-option:hover {
@@ -214,6 +219,7 @@
 
         .discord-option:hover::before {
             left: 0;
+            opacity: 1;
         }
 
         .donate-btn {
@@ -253,8 +259,9 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(135deg, #000000 0%, #333333 100%);
-            transition: left 0.3s ease;
+            transition: left 0.3s ease, opacity 0.3s ease;
             z-index: -1;
+            opacity: 0;
         }
 
         .donate-btn:hover {
@@ -265,6 +272,7 @@
 
         .donate-btn:hover::before {
             left: 0;
+            opacity: 1;
         }
 
         .donate-btn:active {
@@ -377,7 +385,7 @@
         <h1 class="name">MADAMBOSSY01</h1>
         
         <div class="links">
-            <a href="https://your-donate-link.com" target="_blank" class="donate-btn">Donate</a>
+            <a href="https://ezdn.app/a7d1d3578efff15c4f9e65d030e39135" target="_blank" class="donate-btn">Donate</a>
             <a href="https://www.tiktok.com/@yourusername" target="_blank" class="link-item">TikTok</a>
             <div class="discord-wrapper">
                 <a href="#" class="link-item" id="discord-btn">Discord</a>
