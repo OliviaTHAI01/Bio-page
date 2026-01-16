@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BIO</title>
@@ -12,7 +13,7 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
             background: url('url/onepiece1.png') center center / cover no-repeat fixed;
             min-height: 100vh;
             display: flex;
@@ -39,11 +40,20 @@
         }
 
         .container {
+            --glass-bg: rgba(255,255,255,0.15);
+            --glass-border: rgba(255,255,255,0.25);
+            --glass-shadow: 0 8px 32px rgba(0,0,0,0.12);
+            /* Modern glassmorphism card */
+            backdrop-filter: blur(22px) saturate(140%);
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+            border-radius: 28px;
             max-width: 420px;
             width: 100%;
             text-align: center;
             animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 3px solid #000000;
+            border: 1px solid rgba(255,255,255,0.25);
             border-radius: 50px;
             padding: 55px 45px;
             background: rgba(255, 255, 255, 0.98);
@@ -60,23 +70,104 @@
             height: 190px;
             text-decoration: none;
             cursor: pointer;
+            position: relative;
+        }
+
+        /* Purple Flame Effect */
+        .character-link::before,
+        .character-link::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .character-link::before {
+            background: radial-gradient(circle, 
+                rgba(138, 43, 226, 0.8) 0%,
+                rgba(186, 85, 211, 0.6) 30%,
+                rgba(147, 112, 219, 0.4) 50%,
+                rgba(138, 43, 226, 0.2) 70%,
+                transparent 100%);
+            animation: purpleFlame1 2s ease-in-out infinite;
+            filter: blur(8px);
+        }
+
+        .character-link::after {
+            background: radial-gradient(circle, 
+                rgba(186, 85, 211, 0.7) 0%,
+                rgba(138, 43, 226, 0.5) 25%,
+                rgba(147, 112, 219, 0.3) 45%,
+                rgba(186, 85, 211, 0.15) 65%,
+                transparent 100%);
+            animation: purpleFlame2 2.5s ease-in-out infinite;
+            filter: blur(12px);
+            width: 240px;
+            height: 240px;
+        }
+
+        @keyframes purpleFlame1 {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1) rotate(0deg);
+                opacity: 0.8;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.15) rotate(5deg);
+                opacity: 1;
+            }
+        }
+
+        @keyframes purpleFlame2 {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1) rotate(0deg);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.2) rotate(-5deg);
+                opacity: 0.9;
+            }
         }
 
         .character-image {
             width: 190px;
             height: 190px;
             border-radius: 50%;
-            border: 4px solid #000000;
+            border: 4px solid rgba(138, 43, 226, 0.6);
             object-fit: cover;
             display: block;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25), 0 0 0 2px rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(138, 43, 226, 0.4), 
+                        0 0 40px rgba(186, 85, 211, 0.3),
+                        0 0 60px rgba(147, 112, 219, 0.2),
+                        inset 0 0 20px rgba(138, 43, 226, 0.1);
             animation: float 3.5s ease-in-out infinite;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            z-index: 1;
         }
 
         .character-link:hover .character-image {
             transform: scale(1.05);
-            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3), 0 0 0 3px rgba(255, 105, 180, 0.3);
+            box-shadow: 0 15px 40px rgba(138, 43, 226, 0.6), 
+                        0 0 50px rgba(186, 85, 211, 0.5),
+                        0 0 80px rgba(147, 112, 219, 0.4),
+                        inset 0 0 30px rgba(138, 43, 226, 0.2);
+            border-color: rgba(186, 85, 211, 0.9);
+        }
+
+        .character-link:hover::before {
+            animation-duration: 1.5s;
+            filter: blur(10px);
+        }
+
+        .character-link:hover::after {
+            animation-duration: 2s;
+            filter: blur(15px);
         }
 
         @keyframes float {
@@ -110,9 +201,9 @@
         }
 
         .links {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
         }
 
         .link-item {
@@ -166,45 +257,123 @@
             position: relative;
         }
 
-        .discord-dropdown {
+        /* Discord Popup Modal */
+        .discord-popup-overlay {
             display: none;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 10px;
-            animation: slideDown 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease;
         }
 
-        .discord-dropdown.active {
+        .discord-popup-overlay.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .discord-popup {
+            display: none;
+            flex-direction: column;
+            gap: 14px;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            padding: 30px 35px;
+            min-width: 320px;
+            max-width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+            animation: popupSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1001;
+        }
+
+        .discord-popup.active {
             display: flex;
         }
 
-        @keyframes slideDown {
+        .discord-popup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .discord-popup-title {
+            font-size: 1.3em;
+            font-weight: 800;
+            color: #000000;
+            letter-spacing: -0.3px;
+        }
+
+        .discord-popup-close {
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.2s ease;
+            padding: 0;
+        }
+
+        .discord-popup-close:hover {
+            background: rgba(0, 0, 0, 0.1);
+            transform: rotate(90deg);
+        }
+
+        .discord-popup-close svg {
+            width: 20px;
+            height: 20px;
+            fill: #000000;
+        }
+
+        @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(-10px);
             }
             to {
                 opacity: 1;
-                transform: translateY(0);
+            }
+        }
+
+        @keyframes popupSlideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
             }
         }
 
         .discord-option {
             display: block;
-            padding: 13px 22px;
+            padding: 16px 24px;
             border: 2px solid #000000;
             background: #ffffff;
             color: #000000;
             text-decoration: none;
-            font-size: 0.92em;
+            font-size: 0.95em;
             font-weight: 600;
             letter-spacing: 0.35px;
             transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
-            border-radius: 10px;
+            border-radius: 12px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
             isolation: isolate;
+            text-align: center;
         }
 
         .discord-option::before {
@@ -231,11 +400,12 @@
             opacity: 1;
         }
 
+        /* ===== Modern Donate Button ===== */
         .donate-btn {
             display: block;
             padding: 22px 32px;
-            border: 4px solid #000000;
-            background: linear-gradient(135deg, #FF69B4 0%, #FF1493 100%);
+            border: none;
+            background: linear-gradient(135deg, #ff8eaf 0%, #ff2e70 100%);
             color: #ffffff;
             text-decoration: none;
             font-size: 1.18em;
@@ -329,6 +499,29 @@
             }
         }
 
+        /* Demon Rain Effect */
+        .demon-rain {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            pointer-events: none;
+            z-index: 50;
+            animation: demonFall linear forwards;
+            opacity: 0.6;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+        }
+
+        @keyframes demonFall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(calc(100vh + 100px)) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
         @media (max-width: 480px) {
             body {
                 padding: 15px;
@@ -396,6 +589,219 @@
                 font-size: 1.7em;
             }
         }
+
+        /* ===== Music Player Button ===== */
+        .music-player {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            min-width: 300px;
+        }
+
+        .music-player-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .music-btn {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.95) 0%, rgba(186, 85, 211, 0.95) 100%);
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 8px 32px rgba(138, 43, 226, 0.4),
+                        0 0 20px rgba(186, 85, 211, 0.3),
+                        inset 0 2px 4px rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .music-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transition: width 0.4s ease, height 0.4s ease;
+        }
+
+        .music-btn:hover::before {
+            width: 100%;
+            height: 100%;
+        }
+
+        .music-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 40px rgba(138, 43, 226, 0.6),
+                        0 0 30px rgba(186, 85, 211, 0.5),
+                        inset 0 2px 4px rgba(255, 255, 255, 0.3);
+        }
+
+        .music-btn:active {
+            transform: scale(1.05);
+        }
+
+        .music-btn.playing {
+            animation: musicPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes musicPulse {
+            0%, 100% {
+                box-shadow: 0 8px 32px rgba(138, 43, 226, 0.4),
+                            0 0 20px rgba(186, 85, 211, 0.3),
+                            inset 0 2px 4px rgba(255, 255, 255, 0.2);
+            }
+            50% {
+                box-shadow: 0 12px 40px rgba(138, 43, 226, 0.7),
+                            0 0 35px rgba(186, 85, 211, 0.6),
+                            inset 0 2px 4px rgba(255, 255, 255, 0.3);
+            }
+        }
+
+        .music-icon {
+            width: 28px;
+            height: 28px;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease;
+        }
+
+        .music-btn:hover .music-icon {
+            transform: scale(1.1);
+        }
+
+        .music-icon svg {
+            width: 100%;
+            height: 100%;
+            fill: #ffffff;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+        }
+
+        .music-btn.playing .music-icon {
+            animation: musicRotate 3s linear infinite;
+        }
+
+        @keyframes musicRotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Hidden audio element */
+        #background-music {
+            display: none;
+        }
+
+        /* Music Progress Bar */
+        .music-progress-container {
+            width: 100%;
+            max-width: 350px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .music-progress-bar {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            position: relative;
+            backdrop-filter: blur(10px);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .music-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, rgba(138, 43, 226, 0.9) 0%, rgba(186, 85, 211, 0.9) 100%);
+            border-radius: 10px;
+            width: 0%;
+            transition: width 0.1s linear;
+            box-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+            position: relative;
+        }
+
+        .music-progress-fill::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 14px;
+            height: 14px;
+            background: #ffffff;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(138, 43, 226, 0.6);
+            border: 2px solid rgba(138, 43, 226, 0.8);
+        }
+
+        .music-time {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            font-size: 0.75em;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            letter-spacing: 0.5px;
+        }
+
+        .music-time-current,
+        .music-time-total {
+            background: rgba(138, 43, 226, 0.2);
+            padding: 4px 10px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 480px) {
+            .music-player {
+                bottom: 20px;
+                min-width: 280px;
+            }
+
+            .music-btn {
+                width: 56px;
+                height: 56px;
+            }
+
+            .music-icon {
+                width: 24px;
+                height: 24px;
+            }
+
+            .music-progress-container {
+                max-width: 280px;
+            }
+
+            .music-time {
+                font-size: 0.7em;
+            }
+        }
     </style>
 </head>
 <body>
@@ -409,29 +815,100 @@
             <a href="https://ezdn.app/a7d1d3578efff15c4f9e65d030e39135" target="_blank" class="donate-btn">Donate</a>
             <div class="discord-wrapper">
                 <a href="#" class="link-item" id="discord-btn">Discord</a>
-                <div class="discord-dropdown" id="discord-dropdown">
-                    <a href="https://discord.gg/JWn8nXmfY9" target="_blank" class="discord-option">Discord Server 1</a>
-                    <a href="https://discord.gg/NvX9XUsCaw" target="_blank" class="discord-option">Discord Server 2</a>
-                </div>
             </div>
         </div>
     </div>
 
+    <!-- Discord Popup Modal -->
+    <div class="discord-popup-overlay" id="discord-popup-overlay">
+        <div class="discord-popup" id="discord-popup">
+            <div class="discord-popup-header">
+                <h2 class="discord-popup-title">Discord Servers</h2>
+                <button class="discord-popup-close" id="discord-popup-close" aria-label="Close">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                    </svg>
+                </button>
+            </div>
+            <a href="https://discord.gg/JWn8nXmfY9" target="_blank" class="discord-option">Discord Server 1</a>
+            <a href="https://discord.gg/NvX9XUsCaw" target="_blank" class="discord-option">Discord Server 2</a>
+        </div>
+    </div>
+
+    <!-- Music Player -->
+    <div class="music-player">
+        <div class="music-player-controls">
+            <button class="music-btn playing" id="music-btn" aria-label="Play/Pause Music">
+                <div class="music-icon" id="music-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Play Icon -->
+                        <path id="play-icon" d="M8 5v14l11-7z" style="display: none;"/>
+                        <!-- Pause Icon -->
+                        <g id="pause-icon" style="display: block;">
+                            <rect x="6" y="4" width="4" height="16" rx="1"/>
+                            <rect x="14" y="4" width="4" height="16" rx="1"/>
+                        </g>
+                    </svg>
+                </div>
+            </button>
+        </div>
+        <div class="music-progress-container">
+            <div class="music-progress-bar" id="progress-bar">
+                <div class="music-progress-fill" id="progress-fill"></div>
+            </div>
+            <div class="music-time">
+                <span class="music-time-current" id="time-current">0:00</span>
+                <span class="music-time-total" id="time-total">0:00</span>
+            </div>
+        </div>
+    </div>
+
+    <audio id="background-music" loop autoplay volume="0.25">
+        <source src="url/music.mp3" type="audio/mpeg">
+        <source src="url/music.ogg" type="audio/ogg">
+        <source src="url/music.wav" type="audio/wav">
+        Your browser does not support the audio element.
+    </audio>
+
     <script>
-        document.getElementById('discord-btn').addEventListener('click', function(e) {
+        // Discord Popup Control
+        const discordBtn = document.getElementById('discord-btn');
+        const discordPopupOverlay = document.getElementById('discord-popup-overlay');
+        const discordPopup = document.getElementById('discord-popup');
+        const discordPopupClose = document.getElementById('discord-popup-close');
+
+        // เปิด popup
+        discordBtn.addEventListener('click', function(e) {
             e.preventDefault();
-            const dropdown = document.getElementById('discord-dropdown');
-            dropdown.classList.toggle('active');
+            discordPopupOverlay.classList.add('active');
+            discordPopup.classList.add('active');
+            document.body.style.overflow = 'hidden'; // ป้องกัน scroll
         });
 
-        // ปิด dropdown เมื่อคลิกข้างนอก
-        document.addEventListener('click', function(e) {
-            const discordWrapper = document.querySelector('.discord-wrapper');
-            const dropdown = document.getElementById('discord-dropdown');
-            if (!discordWrapper.contains(e.target)) {
-                dropdown.classList.remove('active');
+        // ปิด popup เมื่อคลิกปุ่ม X
+        discordPopupClose.addEventListener('click', function() {
+            closeDiscordPopup();
+        });
+
+        // ปิด popup เมื่อคลิกที่ overlay
+        discordPopupOverlay.addEventListener('click', function(e) {
+            if (e.target === discordPopupOverlay) {
+                closeDiscordPopup();
             }
         });
+
+        // ปิด popup เมื่อกด ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && discordPopupOverlay.classList.contains('active')) {
+                closeDiscordPopup();
+            }
+        });
+
+        function closeDiscordPopup() {
+            discordPopupOverlay.classList.remove('active');
+            discordPopup.classList.remove('active');
+            document.body.style.overflow = ''; // เปิด scroll กลับ
+        }
 
         // เอฟเฟกต์เมื่อกดปุ่ม Donate
         const donateBtn = document.querySelector('.donate-btn');
@@ -486,6 +963,162 @@
                     }, 3000);
                 }, i * 30);
             }
+        });
+
+        // Music Player Control
+        const musicBtn = document.getElementById('music-btn');
+        const musicIcon = document.getElementById('music-icon');
+        const playIcon = document.getElementById('play-icon');
+        const pauseIcon = document.getElementById('pause-icon');
+        const audio = document.getElementById('background-music');
+
+        // ตั้งค่า volume ให้เบาๆ (0.25 = 25%)
+        audio.volume = 0.25;
+
+        let isPlaying = true; // เริ่มต้นด้วยการเล่น
+
+        // Progress Bar Elements
+        const progressBar = document.getElementById('progress-bar');
+        const progressFill = document.getElementById('progress-fill');
+        const timeCurrent = document.getElementById('time-current');
+        const timeTotal = document.getElementById('time-total');
+
+        // Format time to MM:SS
+        function formatTime(seconds) {
+            if (isNaN(seconds)) return '0:00';
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        // Update progress bar and time
+        function updateProgress() {
+            if (audio.duration) {
+                const progress = (audio.currentTime / audio.duration) * 100;
+                progressFill.style.width = progress + '%';
+                timeCurrent.textContent = formatTime(audio.currentTime);
+                timeTotal.textContent = formatTime(audio.duration);
+            }
+        }
+
+        // Update progress every 100ms
+        audio.addEventListener('timeupdate', updateProgress);
+
+        // Update total time when metadata is loaded
+        audio.addEventListener('loadedmetadata', function() {
+            timeTotal.textContent = formatTime(audio.duration);
+        });
+
+        // Click on progress bar to seek
+        progressBar.addEventListener('click', function(e) {
+            const rect = progressBar.getBoundingClientRect();
+            const percent = (e.clientX - rect.left) / rect.width;
+            audio.currentTime = percent * audio.duration;
+            updateProgress();
+        });
+
+        // Auto-play เมื่อโหลดหน้า
+        window.addEventListener('DOMContentLoaded', function() {
+            audio.play().catch(function(error) {
+                console.log('Auto-play blocked by browser:', error);
+                // ถ้า browser block autoplay ให้แสดง play icon แทน
+                playIcon.style.display = 'block';
+                pauseIcon.style.display = 'none';
+                musicBtn.classList.remove('playing');
+                isPlaying = false;
+            });
+        });
+
+        musicBtn.addEventListener('click', function() {
+            if (isPlaying) {
+                audio.pause();
+                playIcon.style.display = 'block';
+                pauseIcon.style.display = 'none';
+                musicBtn.classList.remove('playing');
+                isPlaying = false;
+            } else {
+                audio.play().catch(function(error) {
+                    console.log('Audio play failed:', error);
+                    alert('ไม่พบไฟล์เพลง กรุณาเพิ่มไฟล์เพลงชื่อ music.mp3, music.ogg หรือ music.wav ในโฟลเดอร์โปรเจกต์');
+                });
+                playIcon.style.display = 'none';
+                pauseIcon.style.display = 'block';
+                musicBtn.classList.add('playing');
+                isPlaying = true;
+            }
+        });
+
+        // Update icon when audio ends (shouldn't happen with loop, but just in case)
+        audio.addEventListener('ended', function() {
+            playIcon.style.display = 'block';
+            pauseIcon.style.display = 'none';
+            musicBtn.classList.remove('playing');
+            isPlaying = false;
+        });
+
+        // Handle audio errors
+        audio.addEventListener('error', function() {
+            console.log('Audio error occurred');
+            playIcon.style.display = 'block';
+            pauseIcon.style.display = 'none';
+            musicBtn.classList.remove('playing');
+            isPlaying = false;
+        });
+
+        // Demon Rain Effect
+        const demonImages = [
+            'url/Torirevision.png',
+            'url/NewSukeTransparent.png',
+            'url/Newgoro.png'
+        ];
+
+        function createDemonRain() {
+            const demon = document.createElement('img');
+            // สุ่มเลือกรูปภาพ
+            demon.src = demonImages[Math.floor(Math.random() * demonImages.length)];
+            demon.className = 'demon-rain';
+            demon.alt = '';
+            
+            // สุ่มตำแหน่ง X
+            const randomX = Math.random() * 100;
+            demon.style.left = randomX + '%';
+            
+            // สุ่มความเร็ว (2-4 วินาที) - เร็วขึ้น
+            const duration = Math.random() * 2 + 2;
+            demon.style.animationDuration = duration + 's';
+            
+            // ไม่มี delay - ตกทันที
+            demon.style.animationDelay = '0s';
+            
+            // สุ่มขนาด (30-50px)
+            const size = Math.random() * 20 + 30;
+            demon.style.width = size + 'px';
+            demon.style.height = size + 'px';
+            
+            document.body.appendChild(demon);
+            
+            // ลบ element หลังจาก animation เสร็จ
+            setTimeout(() => {
+                if (demon.parentNode) {
+                    demon.remove();
+                }
+            }, duration * 1000);
+        }
+
+        // สร้าง demon rain ทุก 0.8-1.5 วินาที (ตกบ่อยขึ้น ไม่ค้าง)
+        function startDemonRain() {
+            // สร้างตัวแรกทันที
+            createDemonRain();
+            
+            // สร้างต่อเนื่องทุก 0.8-1.5 วินาที (เร็วขึ้น ไม่ค้าง)
+            setInterval(() => {
+                createDemonRain();
+            }, Math.random() * 700 + 800); // 0.8-1.5 วินาที
+        }
+
+        // เริ่ม demon rain เมื่อโหลดหน้า
+        window.addEventListener('DOMContentLoaded', function() {
+            startDemonRain();
         });
     </script>
 </body>
